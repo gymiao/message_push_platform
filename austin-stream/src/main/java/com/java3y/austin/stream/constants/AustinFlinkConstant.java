@@ -14,15 +14,15 @@ public class AustinFlinkConstant {
      */
     public static final String GROUP_ID = "austinLogGroup";
     public static final String TOPIC_NAME = "austinTraceLog";
-    public static final String BROKER = "austin-kafka:9092";
+    public static final String BROKER = "110.40.153.217:9092";
     /**
      * redis 配置
      * !!!  TODO 使用前配置redis ip:port
      * (真实网络ip,这里不能用配置的hosts，看语雀文档得到真实ip)
      */
-    public static final String REDIS_IP = "austin-redis";
+    public static final String REDIS_IP = "139.224.66.95";
     public static final String REDIS_PORT = "6379";
-    public static final String REDIS_PASSWORD = "austin";
+    public static final String REDIS_PASSWORD = "123321";
     /**
      * Flink流程常量
      */

@@ -48,6 +48,7 @@ public class ThreadPoolExecutorShutdownDefinition implements ApplicationListener
         }
         for (ExecutorService pool : POOLS) {
             pool.shutdown();
+            // 还有任务在处理，尽可能让任务在有限时间内尽可能处理完。
             try {
                 if (!pool.awaitTermination(AWAIT_TERMINATION, TIME_UNIT)) {
                     log.warn("Timed out while waiting for executor [{}] to terminate", pool);

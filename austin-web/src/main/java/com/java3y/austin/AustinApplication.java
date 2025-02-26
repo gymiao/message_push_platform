@@ -1,6 +1,7 @@
 package com.java3y.austin;
 
 import com.java3y.austin.common.constant.AustinConstant;
+import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -9,6 +10,8 @@ import org.springframework.boot.ansi.AnsiColor;
 import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.ansi.AnsiStyle;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -21,6 +24,7 @@ public class AustinApplication implements CommandLineRunner {
     @Value("${server.port}")
     private String serverPort;
 
+
     public static void main(String[] args) {
         /**
          * 如果你需要启动Apollo动态配置
@@ -30,6 +34,7 @@ public class AustinApplication implements CommandLineRunner {
          */
         System.setProperty("apollo.config-service", "http://austin-apollo-config:8080");
         SpringApplication.run(AustinApplication.class, args);
+
         System.out.println("服务器启动成功");
 
     }

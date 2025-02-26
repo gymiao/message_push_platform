@@ -36,10 +36,12 @@ public class ReceiverStart {
      * receiver的消费方法常量
      */
     private static final String RECEIVER_METHOD_NAME = "Receiver.consumer";
+
     /**
      * 获取得到所有的groupId
      */
     private static final List<String> GROUP_IDS = GroupIdMappingUtils.getAllGroupIds();
+
     /**
      * 下标(用于迭代groupIds位置)
      */
@@ -50,6 +52,7 @@ public class ReceiverStart {
     private ConsumerFactory consumerFactory;
 
     /**
+     * 用于增强 @KafkaListener 注解, 为每个 KafkaListener 设置一个 groupId
      * 给每个Receiver对象的consumer方法 @KafkaListener赋值相应的groupId
      */
     @Bean
@@ -71,6 +74,7 @@ public class ReceiverStart {
     @PostConstruct
     public void init() {
         for (int i = 0; i < GROUP_IDS.size(); i++) {
+            // 可以用来创建多个Bean实例
             context.getBean(Receiver.class);
         }
     }

@@ -94,6 +94,14 @@ public class RedisUtils {
     }
 
 
+    public void hincrby(String key, String field, int increment, Long seconds) {
+        redisTemplate.executePipelined((RedisCallback<String>) connection -> {
+            connection.hIncrBy(key.getBytes(StandardCharsets.UTF_8), field.getBytes(StandardCharsets.UTF_8), increment);
+            connection.expire(key.getBytes(StandardCharsets.UTF_8), seconds);
+            return null;
+        });
+    }
+
     /**
      * lpush 方法 并指定 过期时间
      */
@@ -184,6 +192,7 @@ public class RedisUtils {
         }
         return false;
     }
+
 
 
 }

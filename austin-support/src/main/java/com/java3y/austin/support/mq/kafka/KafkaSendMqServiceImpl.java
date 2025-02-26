@@ -38,9 +38,11 @@ public class KafkaSendMqServiceImpl implements SendMqService {
         if (CharSequenceUtil.isNotBlank(tagId)) {
             List<Header> headers = Collections.singletonList(new RecordHeader(tagIdKey, tagId.getBytes(StandardCharsets.UTF_8)));
             kafkaTemplate.send(new ProducerRecord(topic, null, null, null, jsonValue, headers));
+            // System.out.println("kafaka_tagId不为空");
             return;
         }
         kafkaTemplate.send(topic, jsonValue);
+        // System.out.println("kafaka_tagId为空");
     }
 
     @Override

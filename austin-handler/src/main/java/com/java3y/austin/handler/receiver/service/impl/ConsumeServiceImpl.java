@@ -42,6 +42,7 @@ public class ConsumeServiceImpl implements ConsumeService {
         String topicGroupId = GroupIdMappingUtils.getGroupIdByTaskInfo(CollUtil.getFirst(taskInfoLists.iterator()));
         for (TaskInfo taskInfo : taskInfoLists) {
             logUtils.print(LogParam.builder().bizType(LOG_BIZ_TYPE).object(taskInfo).build(), AnchorInfo.builder().bizId(taskInfo.getBizId()).messageId(taskInfo.getMessageId()).ids(taskInfo.getReceiver()).businessId(taskInfo.getBusinessId()).state(AnchorState.RECEIVE.getCode()).build());
+            // 创建任务
             Task task = context.getBean(Task.class).setTaskInfo(taskInfo);
             taskPendingHolder.route(topicGroupId).execute(task);
         }

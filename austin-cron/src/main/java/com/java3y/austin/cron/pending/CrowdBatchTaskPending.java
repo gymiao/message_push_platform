@@ -42,6 +42,7 @@ public class CrowdBatchTaskPending extends AbstractLazyPending<CrowdInfoVo> {
 
     public CrowdBatchTaskPending() {
         PendingParam<CrowdInfoVo> pendingParam = new PendingParam<>();
+        // 消费pending队列实际的线程池
         pendingParam.setQueue(new LinkedBlockingQueue<>(PendingConstant.QUEUE_SIZE))
                 .setTimeThreshold(PendingConstant.TIME_THRESHOLD)
                 .setNumThreshold(AustinConstant.BATCH_RECEIVER_SIZE)

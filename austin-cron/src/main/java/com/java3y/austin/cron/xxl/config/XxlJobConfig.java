@@ -46,6 +46,7 @@ public class XxlJobConfig {
         xxlJobSpringExecutor.setLogPath(logPath);
         xxlJobSpringExecutor.setLogRetentionDays(logRetentionDays);
         // 返回
+        log.info("xxl-job执行器注册成功");
         return xxlJobSpringExecutor;
     }
 

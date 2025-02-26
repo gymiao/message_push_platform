@@ -134,6 +134,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
         if (Objects.nonNull(taskId)) {
             cronTaskService.startCronTask(taskId);
             MessageTemplate clone = ObjectUtil.clone(messageTemplate).setMsgStatus(MessageStatus.RUN.getCode()).setCronTaskId(taskId).setUpdated(Math.toIntExact(DateUtil.currentSeconds()));
+            // 保存到MySQL
             messageTemplateDao.save(clone);
             return BasicResultVO.success();
         }

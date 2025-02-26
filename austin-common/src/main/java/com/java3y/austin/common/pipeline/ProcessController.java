@@ -31,7 +31,7 @@ public class ProcessController {
      */
     public ProcessContext process(ProcessContext context) {
 
-        /**
+        /*
          * 前置检查
          */
         try {
@@ -40,7 +40,7 @@ public class ProcessController {
             return e.getProcessContext();
         }
 
-        /**
+        /*
          * 遍历流程节点
          */
         List<BusinessProcess> processList = templateConfig.get(context.getCode()).getProcessList();

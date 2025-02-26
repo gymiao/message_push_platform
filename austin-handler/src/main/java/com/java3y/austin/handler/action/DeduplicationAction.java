@@ -41,12 +41,15 @@ public class DeduplicationAction implements BusinessProcess<TaskInfo> {
 
         // 配置样例{"deduplication_10":{"num":1,"time":300},"deduplication_20":{"num":5}}
         String deduplicationConfig = config.getProperty(DEDUPLICATION_RULE_KEY, CommonConstant.EMPTY_JSON_OBJECT);
+        // String deduplicationConfig = "{\"deduplication_10\":{\"num\":1,\"time\":3},\"deduplication_20\":{\"num\":500000}}";
 
         // 去重
         List<Integer> deduplicationList = EnumUtil.getCodeList(DeduplicationType.class);
         for (Integer deduplicationType : deduplicationList) {
+            // 构建去重参数
             DeduplicationParam deduplicationParam = deduplicationHolder.selectBuilder(deduplicationType).build(deduplicationConfig, taskInfo);
             if (Objects.nonNull(deduplicationParam)) {
+                // 选择对应的去重服务进行去重
                 deduplicationHolder.selectService(deduplicationType).deduplication(deduplicationParam);
             }
         }

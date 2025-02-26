@@ -198,6 +198,8 @@ public class MessageTemplateController {
     @PostMapping("upload")
     @ApiOperation("/上传人群文件")
     public Map<Object, Object> upload(@RequestParam("file") MultipartFile file) {
+        // TODO windows环境下
+        dataPath = "C:\\JPro\\austin-master\\austin-master\\austin-web\\src\\main\\resources";
         String filePath = dataPath + IdUtil.fastSimpleUUID() + file.getOriginalFilename();
         try {
             File localFile = new File(filePath);

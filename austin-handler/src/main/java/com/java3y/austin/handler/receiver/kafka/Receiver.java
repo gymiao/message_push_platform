@@ -2,6 +2,7 @@ package com.java3y.austin.handler.receiver.kafka;
 
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
+import com.java3y.austin.common.domain.AnchorInfo;
 import com.java3y.austin.common.domain.RecallTaskInfo;
 import com.java3y.austin.common.domain.TaskInfo;
 import com.java3y.austin.handler.receiver.MessageReceiver;
@@ -31,6 +32,7 @@ import java.util.Optional;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.KAFKA)
 public class Receiver implements MessageReceiver {
+
     @Autowired
     private ConsumeService consumeService;
 
@@ -47,14 +49,16 @@ public class Receiver implements MessageReceiver {
 
             List<TaskInfo> taskInfoLists = JSON.parseArray(kafkaMessage.get(), TaskInfo.class);
             String messageGroupId = GroupIdMappingUtils.getGroupIdByTaskInfo(CollUtil.getFirst(taskInfoLists.iterator()));
-            /**
+            /*
              * 每个消费者组 只消费 他们自身关心的消息
              */
             if (topicGroupId.equals(messageGroupId)) {
                 consumeService.consume2Send(taskInfoLists);
             }
         }
+
     }
+
 
     /**
      * 撤回消息
